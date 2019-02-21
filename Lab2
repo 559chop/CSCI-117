@@ -1,0 +1,37 @@
+declare
+fun {Fact R}
+   if R==0 then 1 else R*{Fact R-1} end
+end
+		    
+declare
+fun {Helper N X}
+   if X==0 then 1 else N*{Helper (N-1) (x-1)} end
+end
+
+declare
+fun {Comb2 N R}
+   if R==0 then 1
+
+      else {Helper N (N-(N-R+1))} div {Fact R} end
+end
+
+{Browse {Comb2 10 3}}
+
+
+declare
+fun lazy{IntList N R}
+    if N == 0 then R|{IntList N (R+1)}
+    else N|{IntList (N-1) R} 
+    end
+end
+
+L= {IntList 5 0}
+
+local
+   proc{Disp N List}
+      if N\=0 then
+     case List of H|T then {Browse H} {Disp (N-1) T} end     
+      end
+   end
+in {Disp 40 L}
+end
